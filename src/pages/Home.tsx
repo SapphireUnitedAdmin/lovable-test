@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Icon } from "@/components/Icon";
-import { org } from "@/data/content";
+import { formatDate } from "./News";
+import { org, announcements } from "@/data/content";
 
 const QUICK_TILES = [
   { to: "/onboarding", label: "Start onboarding", desc: "Your step-by-step checklist", icon: "CheckSquare" },
@@ -56,6 +57,36 @@ export default function Home() {
                   {t.desc}
                 </span>
               </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Latest news */}
+      <section className="mt-10">
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="font-serif text-xl font-bold text-brand-800">
+            Latest news
+          </h2>
+          <Link
+            to="/news"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:text-brand-800"
+          >
+            View all <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+        <div className="space-y-3">
+          {announcements.slice(0, 3).map((a, i) => (
+            <Link
+              key={i}
+              to="/news"
+              className="card-hover block rounded-xl border border-slate-200 bg-white p-5"
+            >
+              <span className="text-xs text-slate-400">{formatDate(a.date)}</span>
+              <span className="mt-0.5 block font-semibold text-brand-800">
+                {a.title}
+              </span>
+              <span className="mt-1 block text-sm text-slate-500">{a.body}</span>
             </Link>
           ))}
         </div>

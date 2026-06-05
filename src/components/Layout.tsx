@@ -6,6 +6,7 @@ import { org } from "@/data/content";
 
 const NAV = [
   { to: "/", label: "Welcome", icon: "Home", end: true },
+  { to: "/news", label: "News", icon: "Megaphone" },
   { to: "/values", label: "Our Values", icon: "Gem" },
   { to: "/onboarding", label: "Onboarding", icon: "CheckSquare" },
   { to: "/sops", label: "SOPs", icon: "FileText" },

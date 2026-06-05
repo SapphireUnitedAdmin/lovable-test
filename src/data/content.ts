@@ -24,6 +24,38 @@ export const org = {
 };
 
 // ----------------------------------------------------------------------------
+// NEWS & ANNOUNCEMENTS
+// ----------------------------------------------------------------------------
+export interface Announcement {
+  date: string; // ISO format: "2026-06-01"
+  title: string;
+  body: string;
+  tag?: "News" | "Policy" | "Event" | "People" | "System";
+}
+
+// Newest first. Add new announcements at the top.
+export const announcements: Announcement[] = [
+  {
+    date: "2026-06-01",
+    title: "Welcome to the new CBM Hub",
+    body: "We've launched this hub to bring onboarding, values, SOPs and key resources into one place. Have a look around and send any feedback to your manager.",
+    tag: "News",
+  },
+  {
+    date: "2026-05-20",
+    title: "Updated AML/KYC procedure now live",
+    body: "The client onboarding and AML/KYC SOP has been refreshed to reflect the latest guidance. Please re-read it before your next new-client intake.",
+    tag: "Policy",
+  },
+  {
+    date: "2026-05-12",
+    title: "Quarterly team lunch — 27 June",
+    body: "Join us for the Q2 team lunch at noon on Friday 27 June. Details and dietary requirements form to follow on the shared calendar.",
+    tag: "Event",
+  },
+];
+
+// ----------------------------------------------------------------------------
 // VALUES & CULTURE
 // ----------------------------------------------------------------------------
 export const mission =

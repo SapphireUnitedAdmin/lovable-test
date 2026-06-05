@@ -1,9 +1,31 @@
-import { ExternalLink } from "lucide-react";
+import { useMemo, useState } from "react";
+import { ExternalLink, Search } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import { Icon } from "@/components/Icon";
 import { sops } from "@/data/content";
 
 export default function Sops() {
+  const [query, setQuery] = useState("");
+
+  // Filter categories/items by the search query (matches title & description).
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return sops;
+    return sops
+      .map((cat) => {
+        const catMatches = cat.title.toLowerCase().includes(q);
+        const items = catMatches
+          ? cat.items
+          : cat.items.filter(
+              (i) =>
+                i.title.toLowerCase().includes(q) ||
+                i.description?.toLowerCase().includes(q)
+            );
+        return { ...cat, items };
+      })
+      .filter((cat) => cat.items.length > 0);
+  }, [query]);
+
   return (
     <div>
       <PageHeader
@@ -12,8 +34,27 @@ export default function Sops() {
         intro="Our SOPs keep our work consistent, compliant and high-quality. Find the procedure you need below."
       />
 
+      {/* Search */}
+      <div className="relative mb-6">
+        <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search SOPs…"
+          aria-label="Search SOPs"
+          className="w-full rounded-xl border border-slate-200 bg-white py-3 pl-11 pr-4 text-sm text-slate-700 outline-none transition-colors focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
+        />
+      </div>
+
+      {filtered.length === 0 && (
+        <p className="rounded-lg border border-slate-200 bg-white px-4 py-8 text-center text-sm text-slate-500">
+          No SOPs match "{query}". Try a different search.
+        </p>
+      )}
+
       <div className="grid gap-5 lg:grid-cols-2">
-        {sops.map((cat) => (
+        {filtered.map((cat) => (
           <section
             key={cat.title}
             className="rounded-xl border border-slate-200 bg-white p-6"

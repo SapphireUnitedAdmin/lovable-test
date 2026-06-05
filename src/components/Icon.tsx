@@ -21,6 +21,7 @@ import {
   Link2,
   Contact as ContactIcon,
   HelpCircle,
+  Megaphone,
   type LucideIcon,
 } from "lucide-react";
 
@@ -48,6 +49,7 @@ const ICONS: Record<string, LucideIcon> = {
   Link2,
   Contact: ContactIcon,
   HelpCircle,
+  Megaphone,
 };
 
 export function Icon({

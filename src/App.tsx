@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
+import News from "./pages/News";
 import Values from "./pages/Values";
 import Onboarding from "./pages/Onboarding";
 import Sops from "./pages/Sops";
@@ -14,6 +15,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="news" element={<News />} />
         <Route path="values" element={<Values />} />
         <Route path="onboarding" element={<Onboarding />} />
         <Route path="sops" element={<Sops />} />
